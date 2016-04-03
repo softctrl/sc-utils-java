@@ -117,6 +117,16 @@ public final class GsonUtils {
 
     }
     
+    /**
+     * 
+     * @param json
+     * @return
+     */
+	public static boolean mayBeValidJson(final String json) {
+		return Objects.nonNull(json)
+				&& ((json.startsWith("{") && json.endsWith("}")) || (json.startsWith("[") && json.endsWith("]")));
+	}
+    
     
     /**
      * 

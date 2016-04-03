@@ -141,6 +141,20 @@ public final class GsonUtils {
     	}
     	
     }
-
+    
+    /**
+     *
+     * @param json
+     * @return
+     */
+    public static boolean isValidJson(final String json){
+    	boolean result = false;
+    	try {
+    		fromJson(json, Object.class);
+    		result = true;
+    	} catch (Exception ex) {
+    	}
+    	return result;
+    }
 
 }

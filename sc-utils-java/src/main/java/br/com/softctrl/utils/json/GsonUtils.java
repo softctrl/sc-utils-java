@@ -116,5 +116,21 @@ public final class GsonUtils {
         return result;
 
     }
+    
+    
+    /**
+     * 
+     * @param json
+     * @return
+     */
+    public static String validJson(final String json){
+    	if (mayBeValidJson(json)) {
+    		return json;
+    	} else {
+    		return "{}";
+    	}
+    	
+    }
+
 
 }

@@ -3,8 +3,8 @@ package br.com.softctrl.utils.net;
 import java.io.Serializable;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
-import java.util.Base64;
-import java.util.Base64.Decoder;
+
+import br.com.softctrl.utils.Base64;
 
 /*
 The MIT License (MIT)
@@ -33,7 +33,6 @@ SOFTWARE.
  */
 public class SCAuthenticator extends Authenticator implements Serializable {
     private static final long serialVersionUID = -6629397661312630599L;
-    private static final Decoder B64_DEC = Base64.getDecoder();
     private String username;
     private String password;
 
@@ -55,7 +54,7 @@ public class SCAuthenticator extends Authenticator implements Serializable {
     private static final String get(final String value) {
       String result = value;
       if (value != null && value.length() > 0)
-        result = new String(B64_DEC.decode(value));
+        result = new String(Base64.decode(value, Base64.DEFAULT));
       System.out.println(result);
       return result;
     }

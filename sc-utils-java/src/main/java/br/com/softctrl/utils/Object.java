@@ -32,7 +32,7 @@ SOFTWARE.
 /**
  * @author carlostimoshenkorodrigueslopes@gmail.com
  */
-public class Object<E> implements Serializable {
+public class Object implements Serializable {
 
     /**
      * 

@@ -5,7 +5,7 @@ import java.nio.charset.Charset;
 /*
 The MIT License (MIT)
 
-Copyright (c) 2015 Carlos Timoshenko Rodrigues Lopes
+Copyright (c) 2016 Carlos Timoshenko Rodrigues Lopes
 http://www.0x09.com.br
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

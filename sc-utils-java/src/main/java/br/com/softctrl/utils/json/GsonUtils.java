@@ -10,6 +10,8 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.softctrl.utils.Objects;
+
 /*
 The MIT License (MIT)
 

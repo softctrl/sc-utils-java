@@ -43,14 +43,62 @@ SOFTWARE.
  */
 public final class GsonUtils {
 
-    private GsonUtils() {
+    /**
+     * 
+     * @author carlostimoshenkorodrigueslopes@gmail.com
+     *
+     * @param <E>
+     */
+    public static interface JsonSerializer<E> extends com.google.gson.JsonSerializer<E> {
+        /**
+         * Get the object class to be serialized.
+         * @return the class.
+         */
+        Class<E> getClazz();
+    }
+    
+    private static GsonUtils $THIS = new GsonUtils(false);
+    
+    private Gson gson;
+
+    private GsonUtils(boolean pretty, JsonSerializer<?>... serializers) {
+        GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().serializeNulls();
+        if (pretty) builder.setPrettyPrinting();
+        if (serializers != null) {
+            for (JsonSerializer<?> serializer : serializers) {
+                 builder.registerTypeAdapter(serializer.getClazz(), serializer);
+
+            }
+        }
+        this.gson = builder.create();
+    }
+    
+    /**
+     * 
+     * @param pretty
+     * @param serializers
+     * @return
+     */
+    public GsonUtils setup(boolean pretty, JsonSerializer<?>... serializers) {
+        return ($THIS = new GsonUtils(pretty, serializers));
     }
 
-    private static final Gson GSON = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().serializeNulls()
-            .create();
-    private static final Gson GSON_PRETTY = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().serializeNulls()
-            .setPrettyPrinting().create();
-
+    /**
+     * 
+     * @return
+     */
+    public static final GsonUtils getInstance() {
+        return $THIS;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    Gson getGson() {
+        return this.gson;
+    }
+    
     /**
      * 
      * @param json
@@ -58,7 +106,7 @@ public final class GsonUtils {
      * @return
      */
     public static final <T> T fromJson(final String json, Class<T> clazz) {
-        return GSON.fromJson(json, clazz);
+        return getInstance().getGson().fromJson(json, clazz);
     }
 
     /**
@@ -67,16 +115,7 @@ public final class GsonUtils {
      * @return
      */
     public static final <T> String toJson(final Object object) {
-        return GSON.toJson(object);
-    }
-
-    /**
-     * 
-     * @param object
-     * @return
-     */
-    public static final <T> String toPrettyJson(final Object object) {
-        return GSON_PRETTY.toJson(object);
+        return getInstance().getGson().toJson(object);
     }
 
     /**
@@ -90,7 +129,7 @@ public final class GsonUtils {
         FileReader json;
         try {
             json = new FileReader(new File(file));
-            result = GSON.fromJson(json, clazz);
+            result = getInstance().getGson().fromJson(json, clazz);
             json.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -110,7 +149,7 @@ public final class GsonUtils {
         FileReader json;
         try {
             json = new FileReader(file);
-            result = GSON.fromJson(json, clazz);
+            result = getInstance().getGson().fromJson(json, clazz);
             json.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

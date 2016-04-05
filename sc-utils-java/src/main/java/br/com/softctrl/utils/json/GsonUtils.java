@@ -43,159 +43,160 @@ SOFTWARE.
  */
 public final class GsonUtils {
 
-    /**
-     * 
-     * @author carlostimoshenkorodrigueslopes@gmail.com
-     *
-     * @param <E>
-     */
-    public static interface JsonSerializer<E> extends com.google.gson.JsonSerializer<E> {
-        /**
-         * Get the object class to be serialized.
-         * @return the class.
-         */
-        Class<E> getClazz();
-    }
-    
-    private static GsonUtils $THIS = new GsonUtils(false);
-    
-    private Gson gson;
+	/**
+	 * 
+	 * @author carlostimoshenkorodrigueslopes@gmail.com
+	 *
+	 * @param <E>
+	 */
+	public static interface JsonSerializer<E> extends com.google.gson.JsonSerializer<E> {
+		/**
+		 * Get the object class to be serialized.
+		 * 
+		 * @return the class.
+		 */
+		Class<E> getClazz();
+	}
 
-    private GsonUtils(boolean pretty, JsonSerializer<?>... serializers) {
-        GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().serializeNulls();
-        if (pretty) builder.setPrettyPrinting();
-        if (serializers != null) {
-            for (JsonSerializer<?> serializer : serializers) {
-                 builder.registerTypeAdapter(serializer.getClazz(), serializer);
+	private static GsonUtils $THIS = new GsonUtils(false);
 
-            }
-        }
-        this.gson = builder.create();
-    }
-    
-    /**
-     * 
-     * @param pretty
-     * @param serializers
-     * @return
-     */
-    public GsonUtils setup(boolean pretty, JsonSerializer<?>... serializers) {
-        return ($THIS = new GsonUtils(pretty, serializers));
-    }
+	private Gson gson;
 
-    /**
-     * 
-     * @return
-     */
-    public static final GsonUtils getInstance() {
-        return $THIS;
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    Gson getGson() {
-        return this.gson;
-    }
-    
-    /**
-     * 
-     * @param json
-     * @param clazz
-     * @return
-     */
-    public static final <T> T fromJson(final String json, Class<T> clazz) {
-        return getInstance().getGson().fromJson(json, clazz);
-    }
+	private GsonUtils(boolean pretty, JsonSerializer<?>... serializers) {
+		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().serializeNulls();
+		if (pretty)
+			builder.setPrettyPrinting();
+		if (serializers != null) {
+			for (JsonSerializer<?> serializer : serializers) {
+				builder.registerTypeAdapter(serializer.getClazz(), serializer);
 
-    /**
-     * 
-     * @param object
-     * @return
-     */
-    public static final <T> String toJson(final Object object) {
-        return getInstance().getGson().toJson(object);
-    }
+			}
+		}
+		this.gson = builder.create();
+	}
 
-    /**
-     * 
-     * @param file
-     * @param clazz
-     * @return
-     */
-    public static final <T> T fromJsonFile(final String file, Class<T> clazz) {
-        T result = null;
-        FileReader json;
-        try {
-            json = new FileReader(new File(file));
-            result = getInstance().getGson().fromJson(json, clazz);
-            json.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return result;
+	/**
+	 * 
+	 * @param pretty
+	 * @param serializers
+	 * @return
+	 */
+	public GsonUtils setup(boolean pretty, JsonSerializer<?>... serializers) {
+		return ($THIS = new GsonUtils(pretty, serializers));
+	}
 
-    }
+	/**
+	 * 
+	 * @return
+	 */
+	public static final GsonUtils getInstance() {
+		return $THIS;
+	}
 
-    /**
-     * 
-     * @param file
-     * @param clazz
-     * @return
-     */
-    public static final <T> T fromJsonFile(final File file, Class<T> clazz) {
-        T result = null;
-        FileReader json;
-        try {
-            json = new FileReader(file);
-            result = getInstance().getGson().fromJson(json, clazz);
-            json.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return result;
+	/**
+	 * 
+	 * @return
+	 */
+	Gson getGson() {
+		return this.gson;
+	}
 
-    }
-    
-    /**
-     * 
-     * @param json
-     * @return
-     */
+	/**
+	 * 
+	 * @param json
+	 * @param clazz
+	 * @return
+	 */
+	public static final <T> T fromJson(final String json, Class<T> clazz) {
+		return getInstance().getGson().fromJson(json, clazz);
+	}
+
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public static final <T> String toJson(final Object object) {
+		return getInstance().getGson().toJson(object);
+	}
+
+	/**
+	 * 
+	 * @param file
+	 * @param clazz
+	 * @return
+	 */
+	public static final <T> T fromJsonFile(final String file, Class<T> clazz) {
+		T result = null;
+		FileReader json;
+		try {
+			json = new FileReader(new File(file));
+			result = getInstance().getGson().fromJson(json, clazz);
+			json.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+
+	}
+
+	/**
+	 * 
+	 * @param file
+	 * @param clazz
+	 * @return
+	 */
+	public static final <T> T fromJsonFile(final File file, Class<T> clazz) {
+		T result = null;
+		FileReader json;
+		try {
+			json = new FileReader(file);
+			result = getInstance().getGson().fromJson(json, clazz);
+			json.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+
+	}
+
+	/**
+	 * 
+	 * @param json
+	 * @return
+	 */
 	public static boolean mayBeValidJson(final String json) {
 		return Objects.nonNull(json)
 				&& ((json.startsWith("{") && json.endsWith("}")) || (json.startsWith("[") && json.endsWith("]")));
 	}
-    
-    
-    /**
-     * 
-     * @param json
-     * @return
-     */
-    public static String validJson(final String json){
-    	if (mayBeValidJson(json)) {
-    		return json;
-    	} else {
-    		return "{}";
-    	}
-    	
-    }
-    
-    /**
-     *
-     * @param json
-     * @return
-     */
-    public static boolean isValidJson(final String json){
-    	boolean result = false;
-    	try {
-    		fromJson(json, Object.class);
-    		result = true;
-    	} catch (Exception ex) {
-    	}
-    	return result;
-    }
+
+	/**
+	 * 
+	 * @param json
+	 * @return
+	 */
+	public static String validJson(final String json) {
+		if (mayBeValidJson(json)) {
+			return json;
+		} else {
+			return "{}";
+		}
+
+	}
+
+	/**
+	 *
+	 * @param json
+	 * @return
+	 */
+	public static boolean isValidJson(final String json) {
+		boolean result = false;
+		try {
+			fromJson(json, Object.class);
+			result = true;
+		} catch (Exception ex) {
+		}
+		return result;
+	}
 
 }

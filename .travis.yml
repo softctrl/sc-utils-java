@@ -1,0 +1,6 @@
+
+#File [.travis.yml]
+
+language: java
+
+script: cd sc-utils-java && mvn install && mvn test

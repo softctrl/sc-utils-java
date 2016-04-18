@@ -27,6 +27,7 @@ package br.com.softctrl.utils;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class consists of {@code static} utility methods for operating
@@ -38,7 +39,49 @@ import java.util.List;
  */
 public final class Objects {
     private Objects() {
-        throw new AssertionError("No java.util.Objects instances for you!");
+        throw new AssertionError("No br.com.softctrl.utils.Objects instances for you!");
+    }
+    
+    /**
+     * 
+     * @author carlostimoshenkorodrigueslopes@gmail.com
+     *
+     */
+    public static class StringHelper {
+
+        private StringBuilder mDescription = new StringBuilder();
+        private java.util.HashMap<String, Object> mFields = new java.util.HashMap<String, Object>();
+
+        /**
+         *
+         * @param clazz
+         */
+        private StringHelper(final Class<?> clazz) {
+            this.mDescription.append("Class<").append(clazz.getSimpleName()).append('>').append(':').append(' ');
+        }
+
+        public StringHelper add(String name, Object value) {
+            this.mFields.put(name, value);
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder result = new StringBuilder('{');
+            for (Map.Entry<String, Object> field : this.mFields.entrySet()) {
+                result.append(field.getKey()).append(':').append(' ').append(field.getValue()).append(' ');
+            }
+            return this.mDescription.append(result).append('}').toString();
+        }
+    }
+    
+    /**
+     *
+     * @param clazz
+     * @return
+     */
+    public static StringHelper toStringHelper(final Class<?> clazz) {
+        return new StringHelper(clazz);
     }
     
     /**
@@ -140,6 +183,10 @@ public final class Objects {
      * @see String#valueOf(Object)
      */
     public static String toString(Object o) {
+        return String.valueOf(o);
+    }
+
+    public static <T> String toString(T o) {
         return String.valueOf(o);
     }
 
@@ -249,6 +296,53 @@ public final class Objects {
     }
 
     /**
+     * 
+     * @param obj
+     * @return
+     */
+    public static <T> boolean isNull(T obj) {
+        return (obj == null);
+    }
+    
+    
+    /**
+     * 
+     * @param value
+     * @return
+     */
+    public static boolean isNullOrEmpty(String value) {
+        return ((value + "").trim().length() > 0);
+    }
+
+    /**
+     * 
+     * @param items
+     * @return
+     */
+    public static boolean isNullOrEmpty(Object[] items) {
+        return (isNull(items) ? true : (items.length == 0));
+    }
+
+    /**
+     * 
+     * @param items
+     * @return
+     */
+    public static <T> boolean isNullOrEmpty(T[] items) {
+        return (isNull(items) ? true : (items.length == 0));
+    }
+
+    /**
+     * 
+     * @param items
+     * @return
+     */
+    public static <T> boolean isNullOrEmpty(List<T> items) {
+        return (isNull(items) ? true : (items.size() == 0));
+    }
+    
+
+    /**
      * Returns {@code true} if the provided reference is non-{@code null}
      * otherwise returns {@code false}.
      *
@@ -262,18 +356,56 @@ public final class Objects {
      * @see java.util.function.Predicate
      * @since 1.8
      */
-    public static boolean nonNull(Object obj) {
+    public static <T> boolean nonNull(T obj) {
         return obj != null;
     }
 
     /**
-     * I just need this.
-     * @param obj
+     * 
+     * @param value
      * @return
      */
-    public static <E> boolean nonNull(E obj) {
-        return obj != null;
+    public static boolean nonNullOrEmpty(String value) {
+        return (value != null && value.trim().length() > 0);
     }
+
+    /**
+     * 
+     * @param tArray
+     * @return
+     */
+    public static <T> boolean nonNullOrEmpty(T[] tArray) {
+        return (tArray != null && tArray.length > 0);
+    }
+
+    /**
+     * 
+     * @param map
+     * @return
+     */
+    public static <K, V> boolean nonNullOrEmpty(Map<K, V> map) {
+        return (map != null && map.size() > 0);
+    }
+
+    /**
+     * 
+     * @param tArray
+     * @return
+     */
+    public static <T> boolean nonNullOrEmpty(List<T> tList) {
+        return (tList != null && tList.size() > 0);
+    }
+
+    /**
+     * 
+     * @param value
+     * @param defaultValue
+     * @return
+     */
+    public static <T>  T thisOrDefault(T value, T defaultValue) {
+        return (T) (value == null ? requireNonNull(defaultValue, "Seriously!!"): value);
+    }
+    
     /**
      * 
      * @author carlostimoshenkorodrigueslopes@gmail.com

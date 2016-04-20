@@ -4,8 +4,10 @@
 package br.com.softctrl.utils.json;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -173,16 +175,29 @@ public final class GsonUtils {
 	 */
 	public static final <T> T fromJson(final File file, Class<T> clazz) {
 		T result = null;
-		FileReader json;
 		try {
-			json = new FileReader(file);
-			result = getInstance().getGson().fromJson(json, clazz);
-			json.close();
+			result = fromJson(new FileReader(file), clazz);
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param reader
+	 * @param clazz
+	 * @return
+	 */
+	public static final <T> T fromJson(final Reader reader, Class<T> clazz) {
+		T result = null;
+		try {
+			result = getInstance().getGson().fromJson(reader, clazz);
+			reader.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		return result;
-
 	}
 	
 	/**

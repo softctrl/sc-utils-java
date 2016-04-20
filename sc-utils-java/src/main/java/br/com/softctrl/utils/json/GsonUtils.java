@@ -162,17 +162,7 @@ public final class GsonUtils {
 	 * @return
 	 */
 	public static final <T> T fromJsonFile(final String file, Class<T> clazz) {
-		T result = null;
-		FileReader json;
-		try {
-			json = new FileReader(new File(file));
-			result = getInstance().getGson().fromJson(json, clazz);
-			json.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return result;
-
+		return fromJson(new File(file), clazz);
 	}
 
 	/**
@@ -181,7 +171,7 @@ public final class GsonUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static final <T> T fromJsonFile(final File file, Class<T> clazz) {
+	public static final <T> T fromJson(final File file, Class<T> clazz) {
 		T result = null;
 		FileReader json;
 		try {
@@ -194,7 +184,7 @@ public final class GsonUtils {
 		return result;
 
 	}
-
+	
 	/**
 	 * 
 	 * @param json

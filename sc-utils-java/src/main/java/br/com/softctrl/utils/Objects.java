@@ -311,7 +311,7 @@ public final class Objects {
      * @return
      */
     public static boolean isNullOrEmpty(String value) {
-        return ((value + "").trim().length() > 0);
+        return ((value + "").trim().length() == 0);
     }
 
     /**

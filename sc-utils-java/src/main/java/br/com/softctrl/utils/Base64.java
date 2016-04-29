@@ -478,6 +478,16 @@ public class Base64 {
     }
 
     /**
+     * 
+     * @param input
+     * @return
+     * @throws UnsupportedEncodingException 
+     */
+    public static String encode(byte[] input) throws UnsupportedEncodingException {
+        return new String(encode(input, 0, input.length, DEFAULT), "UTF-8");
+    }
+
+    /**
      * Base64-encode the given data and return a newly allocated byte[] with the
      * result.
      *

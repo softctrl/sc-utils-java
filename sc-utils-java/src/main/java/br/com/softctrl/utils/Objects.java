@@ -408,6 +408,69 @@ public final class Objects {
     
     /**
      * 
+     * @param value
+     * @return
+     */
+    public static int length(String value){
+    	return thisOrDefault(value, "").trim().length();
+    }
+    
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static <T> int length(T[] values){
+    	return  (isNull(values) ? -1 : values.length);
+    }
+    
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static <T> int length(List<T> values){
+    	return  (isNull(values) ? -1 : values.size());
+    }
+    
+    /**
+     * 
+     * @param value
+     * @param start
+     * @param end
+     * @return
+     */
+    public static boolean inRange(int value, int start, int end){
+    	return (start <= value && value <= end);
+    }
+    
+    /**
+     * 
+     * @param value
+     * @param start
+     * @param end
+     * @return
+     */
+    public static boolean inRange(String value, int start, int end){
+    	int length = length(value);
+    	return (start <= length && length <= end);
+    }
+    
+    /**
+     * 
+     * @param value
+     * @param start
+     * @param end
+     * @return
+     */
+    public static <T extends Number> boolean inRange(T value, int start, int end){
+    	int vlr = requireNonNull(value).intValue();
+    	return (start <= vlr && vlr <= end);
+    }
+
+    
+    /**
+     * 
      * @author carlostimoshenkorodrigueslopes@gmail.com
      *
      */

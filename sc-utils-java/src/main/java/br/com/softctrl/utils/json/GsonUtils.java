@@ -70,16 +70,7 @@ public final class GsonUtils {
 	 * @param serializers
 	 */
 	private GsonUtils(boolean pretty, JsonSerializer<?>... serializers) {
-		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().serializeNulls();
-		if (pretty)
-			builder.setPrettyPrinting();
-		if (serializers != null) {
-			for (JsonSerializer<?> serializer : serializers) {
-				builder.registerTypeAdapter(serializer.getClazz(), serializer);
-
-			}
-		}
-		this.gson = builder.create();
+		this(pretty, false, serializers);
 	}
 	
 	/**
@@ -89,7 +80,7 @@ public final class GsonUtils {
 	 * @param serializers
 	 */
 	private GsonUtils(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
-		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation().serializeNulls();
+		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation();
 		if (pretty) builder.setPrettyPrinting();
 		if (serializeNulls) builder.serializeNulls();
 		if (serializers != null) {
@@ -119,7 +110,7 @@ public final class GsonUtils {
 	 * @return
 	 */
 	public GsonUtils setup(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
-		return ($THIS = new GsonUtils(pretty, serializers));
+		return ($THIS = new GsonUtils(pretty, serializeNulls, serializers));
 	}
 
 	/**

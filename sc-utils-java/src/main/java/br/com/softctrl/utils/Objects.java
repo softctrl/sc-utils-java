@@ -99,7 +99,7 @@ public final class Objects {
      * and {@code false} otherwise
      * @see Object#equals(Object)
      */
-    public static boolean equals(Object a, Object b) {
+    public static <T> boolean equals(T a, T b) {
         return (a == b) || (a != null && a.equals(b));
     }
 

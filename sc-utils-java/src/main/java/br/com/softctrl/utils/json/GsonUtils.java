@@ -60,19 +60,10 @@ public final class GsonUtils {
 		Class<E> getClazz();
 	}
 
-	private static GsonUtils $THIS = new GsonUtils(false);
+	private static GsonUtils $THIS = new GsonUtils(false, true);
 
 	private Gson gson;
 
-	/**
-	 * 
-	 * @param pretty
-	 * @param serializers
-	 */
-	private GsonUtils(boolean pretty, JsonSerializer<?>... serializers) {
-		this(pretty, false, serializers);
-	}
-	
 	/**
 	 * 
 	 * @param pretty
@@ -98,8 +89,8 @@ public final class GsonUtils {
 	 * @param serializers
 	 * @return
 	 */
-	public GsonUtils setup(boolean pretty, JsonSerializer<?>... serializers) {
-		return ($THIS = new GsonUtils(pretty, serializers));
+	public static final GsonUtils setup(boolean pretty, JsonSerializer<?>... serializers) {
+		return ($THIS = new GsonUtils(pretty, true, serializers));
 	}
 
 	/**
@@ -109,7 +100,7 @@ public final class GsonUtils {
 	 * @param serializers
 	 * @return
 	 */
-	public GsonUtils setup(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
+	public static final GsonUtils setup(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
 		return ($THIS = new GsonUtils(pretty, serializeNulls, serializers));
 	}
 

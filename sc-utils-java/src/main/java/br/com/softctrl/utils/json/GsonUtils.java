@@ -44,6 +44,13 @@ SOFTWARE.
  * @author carlostimoshenkorodrigueslopes@gmail.com
  */
 public final class GsonUtils {
+	
+	static final class Constants {
+		public static final String JSON_PATTERN = "(^\\{.*}+$|^\\[ *\\{.*} *]+$)";
+		public static final String EMPTY_JSON_OBJECT = "{}";
+		public static final String EMPTY_JSON_ARRAY = "[]";
+		public static final String EMPTY_STRING = "";
+	}
 
 	/**
 	 * 
@@ -188,8 +195,7 @@ public final class GsonUtils {
 	 * @return
 	 */
 	public static boolean mayBeValidJson(final String json) {
-		return Objects.nonNull(json)
-				&& ((json.startsWith("{") && json.endsWith("}")) || (json.startsWith("[") && json.endsWith("]")));
+		return Objects.thisOrDefault(json, Constants.EMPTY_STRING).matches(Constants.JSON_PATTERN);
 	}
 
 	/**
@@ -201,7 +207,7 @@ public final class GsonUtils {
 		if (mayBeValidJson(json)) {
 			return json;
 		} else {
-			return "{}";
+			return Constants.EMPTY_JSON_OBJECT;
 		}
 
 	}

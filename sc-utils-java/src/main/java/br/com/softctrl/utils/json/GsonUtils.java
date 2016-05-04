@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,53 +16,50 @@ import com.google.gson.GsonBuilder;
 import br.com.softctrl.utils.Objects;
 
 /*
-The MIT License (MIT)
-
-Copyright (c) 2016 Carlos Timoshenko Rodrigues Lopes
-http://www.0x09.com.br
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ * The MIT License (MIT)
+ * Copyright (c) 2016 Carlos Timoshenko Rodrigues Lopes
+ * http://www.0x09.com.br
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
 /**
- * 
  * @author carlostimoshenkorodrigueslopes@gmail.com
  */
 public final class GsonUtils {
-	
+
 	static final class Constants {
-		public static final String JSON_PATTERN = "(^\\{.*}+$|^\\[ *\\{.*} *]+$)";
+
+		public static final String JSON_PATTERN = "(^\\[ *\\{.*} *]+$|^\\{.*}+$|^\\[ *]+$)";
+
 		public static final String EMPTY_JSON_OBJECT = "{}";
+
 		public static final String EMPTY_JSON_ARRAY = "[]";
+
 		public static final String EMPTY_STRING = "";
 	}
 
 	/**
-	 * 
 	 * @author carlostimoshenkorodrigueslopes@gmail.com
-	 *
 	 * @param <E>
 	 */
 	public static interface JsonSerializer<E> extends com.google.gson.JsonSerializer<E> {
+
 		/**
 		 * Get the object class to be serialized.
-		 * 
 		 * @return the class.
 		 */
 		Class<E> getClazz();
@@ -72,15 +70,16 @@ public final class GsonUtils {
 	private Gson gson;
 
 	/**
-	 * 
 	 * @param pretty
 	 * @param serializeNulls
 	 * @param serializers
 	 */
 	private GsonUtils(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
 		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation();
-		if (pretty) builder.setPrettyPrinting();
-		if (serializeNulls) builder.serializeNulls();
+		if (pretty)
+			builder.setPrettyPrinting();
+		if (serializeNulls)
+			builder.serializeNulls();
 		if (serializers != null) {
 			for (JsonSerializer<?> serializer : serializers) {
 				builder.registerTypeAdapter(serializer.getClazz(), serializer);
@@ -91,7 +90,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @param pretty
 	 * @param serializers
 	 * @return
@@ -101,7 +99,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @param pretty
 	 * @param serializeNulls
 	 * @param serializers
@@ -112,7 +109,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public static final GsonUtils getInstance() {
@@ -120,7 +116,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	Gson getGson() {
@@ -128,7 +123,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @param json
 	 * @param clazz
 	 * @return
@@ -138,7 +132,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @param object
 	 * @return
 	 */
@@ -147,7 +140,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @param file
 	 * @param clazz
 	 * @return
@@ -157,7 +149,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @param file
 	 * @param clazz
 	 * @return
@@ -171,9 +162,8 @@ public final class GsonUtils {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * 
 	 * @param reader
 	 * @param clazz
 	 * @return
@@ -188,9 +178,8 @@ public final class GsonUtils {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * 
 	 * @param json
 	 * @return
 	 */
@@ -199,7 +188,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 * 
 	 * @param json
 	 * @return
 	 */
@@ -213,7 +201,6 @@ public final class GsonUtils {
 	}
 
 	/**
-	 *
 	 * @param json
 	 * @return
 	 */
@@ -225,6 +212,34 @@ public final class GsonUtils {
 		} catch (Exception ex) {
 		}
 		return result;
+	}
+
+	private static final String VALID_JSON = "{\"vlr0\":0,\"vlr1\":false,\"vlr2\":\"\u0000\",\"vlr3\":0.0,\"vlr4\":0.0,\"vlr5\":0,\"vlr6\":0,\"vlr7\":null,\"vlr8\":null,\"vlr9\":null,\"vlr10\":null,\"vlr11\":null,\"vlr12\":null}";
+
+	private static final HashMap<String, Boolean> JSONS = new HashMap<String, Boolean>();
+
+	static {
+		JSONS.put(VALID_JSON, true);
+		JSONS.put("[]", true);
+		JSONS.put("{}", true);
+		JSONS.put("{                        }", true);
+		JSONS.put("{             g           }", true);
+		JSONS.put("[{},{}]", true);
+		JSONS.put("[}", false);
+		JSONS.put("{]", false);
+		JSONS.put("[{},{            ]", false);
+		JSONS.put("[          {},{}.]", false);
+		JSONS.put("[},{}]", false);
+		JSONS.put("[.{},{}]", false);
+	}
+
+	public static void main(String[] args) {
+//		for (Entry<String, Boolean> item : JSONS.entrySet()) {
+//			System.out.println(String.format("%s -> %s | %s", item.getValue(), GsonUtils.mayBeValidJson(item.getKey()), item.getKey()));
+//		}
+
+		System.out.println("\"nom\":".matches("\"[a-zA-Z]{1,}\": *null"));
+
 	}
 
 }

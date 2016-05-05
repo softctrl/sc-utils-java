@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.softctrl.utils.Objects;
+import br.com.softctrl.utils.json.adapter.StringAdapterFactory;
 
 /*
  * The MIT License (MIT)
@@ -76,6 +77,7 @@ public final class GsonUtils {
 	 */
 	private GsonUtils(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
 		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation();
+		builder.registerTypeAdapterFactory(new StringAdapterFactory());		
 		if (pretty)
 			builder.setPrettyPrinting();
 		if (serializeNulls)

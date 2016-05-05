@@ -253,6 +253,26 @@ public final class Objects {
     }
 
     /**
+     * 
+     * @param objects
+     * @return
+     */
+    public static <T> List<T> requireNonNull(List<T> objects) {
+        if (isNullOrEmpty(objects)) throw new NullPointerException();
+        return objects;
+    }
+
+    /**
+     * 
+     * @param objects
+     * @return
+     */
+    public static <T> T[] requireNonNull(T[] objects) {
+        if (isNullOrEmpty(objects)) throw new NullPointerException();
+        return objects;
+    }
+
+    /**
      * Checks that the specified object reference is not {@code null} and
      * throws a customized {@link NullPointerException} if it is. This method
      * is designed primarily for doing parameter validation in methods and

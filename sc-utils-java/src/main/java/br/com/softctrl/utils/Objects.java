@@ -142,7 +142,20 @@ public final class Objects {
         return o != null ? o.hashCode() : 0;
     }
 
-   /**
+    /**
+     * Returns the hash code of a non-{@code null} argument and 0 for
+     * a {@code null} argument.
+     *
+     * @param o an generic Object
+     * @return the hash code of a non-{@code null} argument and 0 for
+     * a {@code null} argument
+     * @see Object#hashCode
+     */
+    public static <T> int hashCode(T o) {
+        return o != null ? o.hashCode() : 0;
+    }
+
+    /**
     * Generates a hash code for a sequence of input values. The hash
     * code is generated as if all the input values were placed into an
     * array, and that array were hashed by calling {@link
@@ -172,6 +185,14 @@ public final class Objects {
         return Arrays.hashCode(values);
     }
 
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static <T> int hash(T... values) {
+        return Arrays.hashCode(values);
+    }
     /**
      * Returns the result of calling {@code toString} for a non-{@code
      * null} argument and {@code "null"} for a {@code null} argument.

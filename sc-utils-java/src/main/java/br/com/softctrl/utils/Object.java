@@ -1,5 +1,6 @@
 package br.com.softctrl.utils;
 
+import java.io.File;
 import java.io.Serializable;
 
 import br.com.softctrl.utils.json.GsonUtils;
@@ -54,6 +55,16 @@ public class Object implements Serializable {
      * @return
      */
     public static <E> E fromJson(String json, Class<E> clazz){
+        return GsonUtils.fromJson(json, clazz);
+    }
+
+    /**
+     * 
+     * @param json
+     * @param clazz
+     * @return
+     */
+    public static <E> E fromJson(File json, Class<E> clazz){
         return GsonUtils.fromJson(json, clazz);
     }
 

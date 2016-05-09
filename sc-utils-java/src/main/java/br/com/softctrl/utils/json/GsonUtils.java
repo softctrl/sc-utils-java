@@ -69,7 +69,7 @@ public final class GsonUtils {
 	private static GsonUtils $THIS = new GsonUtils(false, true);
 
 	private Gson gson;
-
+	
 	/**
 	 * @param pretty
 	 * @param serializeNulls

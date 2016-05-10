@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -66,7 +65,7 @@ public final class GsonUtils {
 		Class<E> getClazz();
 	}
 
-	private static GsonUtils $THIS = new GsonUtils(false, true);
+	private static GsonUtils $THIS = new GsonUtils(false, false);
 
 	private Gson gson;
 

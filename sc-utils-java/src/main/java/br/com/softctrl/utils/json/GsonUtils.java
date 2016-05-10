@@ -69,7 +69,7 @@ public final class GsonUtils {
 	private static GsonUtils $THIS = new GsonUtils(false, true);
 
 	private Gson gson;
-	
+
 	/**
 	 * @param pretty
 	 * @param serializeNulls
@@ -77,7 +77,7 @@ public final class GsonUtils {
 	 */
 	private GsonUtils(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
 		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation();
-		builder.registerTypeAdapterFactory(new StringAdapterFactory());		
+		builder.registerTypeAdapterFactory(new StringAdapterFactory());
 		if (pretty)
 			builder.setPrettyPrinting();
 		if (serializeNulls)
@@ -214,34 +214,6 @@ public final class GsonUtils {
 		} catch (Exception ex) {
 		}
 		return result;
-	}
-
-	private static final String VALID_JSON = "{\"vlr0\":0,\"vlr1\":false,\"vlr2\":\"\u0000\",\"vlr3\":0.0,\"vlr4\":0.0,\"vlr5\":0,\"vlr6\":0,\"vlr7\":null,\"vlr8\":null,\"vlr9\":null,\"vlr10\":null,\"vlr11\":null,\"vlr12\":null}";
-
-	private static final HashMap<String, Boolean> JSONS = new HashMap<String, Boolean>();
-
-	static {
-		JSONS.put(VALID_JSON, true);
-		JSONS.put("[]", true);
-		JSONS.put("{}", true);
-		JSONS.put("{                        }", true);
-		JSONS.put("{             g           }", true);
-		JSONS.put("[{},{}]", true);
-		JSONS.put("[}", false);
-		JSONS.put("{]", false);
-		JSONS.put("[{},{            ]", false);
-		JSONS.put("[          {},{}.]", false);
-		JSONS.put("[},{}]", false);
-		JSONS.put("[.{},{}]", false);
-	}
-
-	public static void main(String[] args) {
-//		for (Entry<String, Boolean> item : JSONS.entrySet()) {
-//			System.out.println(String.format("%s -> %s | %s", item.getValue(), GsonUtils.mayBeValidJson(item.getKey()), item.getKey()));
-//		}
-
-		System.out.println("\"nom\":".matches("\"[a-zA-Z]{1,}\": *null"));
-
 	}
 
 }

@@ -30,10 +30,7 @@ SOFTWARE.
  */
 public final class StringUtils {
 
-    private static final String _02X = "%02x";
-
-    private StringUtils() {
-    }
+    private StringUtils() { }
 
     /**
      * Base on:
@@ -61,7 +58,7 @@ public final class StringUtils {
         int len = array.length;
         StringBuilder result = new StringBuilder();
         for (int idx = 0; idx < len; idx++) {
-            result.append(String.format(_02X, array[idx]));
+            result.append(String.format(Contants._02X, array[idx]));
         }
         return result.toString();
     }

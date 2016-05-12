@@ -34,4 +34,7 @@ public final class Contants {
 
     public static final Charset UTF_8 = Charset.forName("UTF-8");
 
+    public static final String _02X = "%02x";
+
+
 }

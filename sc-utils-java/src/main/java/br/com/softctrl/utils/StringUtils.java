@@ -34,17 +34,16 @@ public final class StringUtils {
 
     /**
      * Base on:
-     * http://stackoverflow.com/questions/140131/convert-a-string-representation
-     * -of-a-hex-dump-to-a-byte-array-using-java
+     * http://stackoverflow.com/questions/140131/convert-a-string-representation-of-a-hex-dump-to-a-byte-array-using-java
      * 
-     * @param s
+     * @param value
      * @return
      */
-    public final static byte[] hexStringToByteArray(String s) {
-        int len = s.length();
+    public final static byte[] hexStringToByteArray(String value) {
+        int len = Objects.requireNonNull(value).length();
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
-            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
+            data[i / 2] = (byte) ((Character.digit(value.charAt(i), 16) << 4) + Character.digit(value.charAt(i + 1), 16));
         }
         return data;
     }
@@ -55,7 +54,7 @@ public final class StringUtils {
      * @return
      */
     public final static String byteArrayToHexString(byte[] array) {
-        int len = array.length;
+        int len = Objects.length(Objects.requireNonNull(array));
         StringBuilder result = new StringBuilder();
         for (int idx = 0; idx < len; idx++) {
             result.append(String.format(Contants._02X, array[idx]));

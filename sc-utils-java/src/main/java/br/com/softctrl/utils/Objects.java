@@ -490,6 +490,60 @@ public final class Objects {
      * @param values
      * @return
      */
+    public static int length(byte[] values){
+    	return  (isNull(values) ? -1 : values.length);
+    }
+
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static int length(char[] values){
+    	return  (isNull(values) ? -1 : values.length);
+    }
+
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static int length(double[] values){
+    	return  (isNull(values) ? -1 : values.length);
+    }
+
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static int length(float[] values){
+    	return  (isNull(values) ? -1 : values.length);
+    }
+
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static int length(int[] values){
+    	return  (isNull(values) ? -1 : values.length);
+    }
+
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    public static int length(long[] values){
+    	return  (isNull(values) ? -1 : values.length);
+    }
+
+    /**
+     * 
+     * @param values
+     * @return
+     */
     public static <T> int length(List<T> values){
     	return  (isNull(values) ? -1 : values.size());
     }

@@ -47,7 +47,16 @@ public final class Objects {
      * @author carlostimoshenkorodrigueslopes@gmail.com
      *
      */
-    public static class StringHelper {
+    public static final class StringHelper {
+
+    	/**
+    	 * 
+    	 * @author carlostimoshenkorodrigueslopes@gmail.com
+    	 *
+    	 */
+    	private static final class Constants {
+    		private static final String CLASS_FORMAT = "Class<%s>: ";
+    	}
 
         private StringBuilder mDescription = new StringBuilder();
         private java.util.HashMap<String, Object> mFields = new java.util.HashMap<String, Object>();
@@ -57,14 +66,25 @@ public final class Objects {
          * @param clazz
          */
         private StringHelper(final Class<?> clazz) {
-            this.mDescription.append("Class<").append(clazz.getSimpleName()).append('>').append(':').append(' ');
+            this.mDescription.append(String.format(Constants.CLASS_FORMAT,
+            		                               Objects.requireNonNull(clazz).getSimpleName()));
         }
 
+        /**
+         * 
+         * @param name
+         * @param value
+         * @return
+         */
         public StringHelper add(String name, Object value) {
             this.mFields.put(name, value);
             return this;
         }
 
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
         @Override
         public String toString() {
             StringBuilder result = new StringBuilder('{');
@@ -509,42 +529,4 @@ public final class Objects {
     	return (start <= vlr && vlr <= end);
     }
 
-    
-    /**
-     * 
-     * @author carlostimoshenkorodrigueslopes@gmail.com
-     *
-     */
-    public static class ToString {
-        private static final String FORM = "[%s = %s]";
-        private StringBuilder toString;
-        ToString(){ this.toString = new StringBuilder(); }
-        ToString(Class<?> clazz){ this.toString = new StringBuilder(clazz.getSimpleName()); }
-        public ToString append(Object value, String description){
-            this.toString.append(String.format(FORM, description, Objects.toString(value)));
-            return this;
-        }
-        @Override public String toString() {
-            return this.toString.toString();
-        }
-        
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    public ToString ToString(){
-        return new ToString(); 
-    }
-    
-    /**
-     * 
-     * @param clazz
-     * @return
-     */
-    public ToString ToString(Class<?> clazz){
-        return new ToString(clazz);
-    }
-    
 }

@@ -11,6 +11,7 @@ import java.io.Reader;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 
 import br.com.softctrl.utils.Objects;
 import br.com.softctrl.utils.json.adapter.StringAdapterFactory;
@@ -177,6 +178,18 @@ public final class GsonUtils {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param json
+	 * @param clazz
+	 * @return
+	 */
+	public static final <T> T fromJson(final JsonElement json, final Class<T> clazz) {
+		T result = null;
+		result = getInstance().getGson().fromJson(json, clazz);
 		return result;
 	}
 

@@ -137,8 +137,17 @@ public final class GsonUtils {
 	 * @param object
 	 * @return
 	 */
-	public static final <T> String toJson(final Object object) {
+	public static final <T> String toJson(final T object) {
 		return getInstance().getGson().toJson(object);
+	}
+
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public static final <T> JsonElement toJsonElement(final T object) {
+		return getInstance().getGson().toJsonTree(object);
 	}
 
 	/**

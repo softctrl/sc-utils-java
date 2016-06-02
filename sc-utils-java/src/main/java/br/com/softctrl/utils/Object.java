@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -91,7 +92,15 @@ public class Object implements Serializable {
         return GsonUtils.toJson(this);
     }
     
-	/**
+    /**
+     * 
+     * @return
+     */
+    public final JsonElement toJsonElement() {
+        return GsonUtils.toJsonElement(this);
+    }
+
+    /**
 	 * Performs a compression on the Json representation of this instance object.
 	 * @return A compressed string.
 	 * @throws IOException .
@@ -134,6 +143,15 @@ public class Object implements Serializable {
         return GsonUtils.fromJson(json, clazz);
     }
 
+    /**
+     * 
+     * @param json
+     * @param clazz
+     * @return
+     */
+    public static <E> E fromJson(JsonElement json, Class<E> clazz){
+        return GsonUtils.fromJson(json, clazz);
+    }
     /**
      * 
      * @param json

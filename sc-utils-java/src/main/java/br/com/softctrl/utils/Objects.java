@@ -29,6 +29,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import br.com.softctrl.utils.json.GsonUtils;
+
 /**
  * This class consists of {@code static} utility methods for operating
  * on objects.  These utilities include {@code null}-safe or {@code
@@ -87,12 +92,22 @@ public final class Objects {
 		 */
         @Override
         public String toString() {
-            StringBuilder result = new StringBuilder('{');
-            for (Map.Entry<String, Object> field : this.mFields.entrySet()) {
-                result.append(field.getKey()).append(':').append(' ').append(field.getValue()).append(' ');
-            }
-            return this.mDescription.append(result).append('}').toString();
+			StringBuilder result = new StringBuilder('{');
+			for (Map.Entry<String, Object> field : this.mFields.entrySet()) {
+				result.append(field.getKey()).append(':').append(' ').append(field.getValue()).append(' ');
+			}
+			return this.mDescription.append(result).append('}').toString();
         }
+        
+        public <T> String toString(T object) {
+        	if (nonNull(object)) {
+        		JsonObject json = GsonUtils.toJsonElement(object).getAsJsonObject();
+        		//json.
+        		// TODO em desenvolvimento
+        	}
+        	return "";
+        }
+        
     }
     
     /**
@@ -227,8 +242,13 @@ public final class Objects {
         return String.valueOf(o);
     }
 
-    public static <T> String toString(T o) {
-        return String.valueOf(o);
+    /**
+     * 
+     * @param object
+     * @return
+     */
+    public static <T> String toString(T object) {
+        return String.valueOf(object);
     }
 
     /**
@@ -402,6 +422,14 @@ public final class Objects {
         return (isNull(items) ? true : (items.size() == 0));
     }
     
+    /**
+     * 
+     * @param items
+     * @return
+     */
+    public static <T, S> boolean isNullOrEmpty(Map<T, S> items) {
+        return (isNull(items) ? true : (items.size() == 0));
+    }
 
     /**
      * Returns {@code true} if the provided reference is non-{@code null}

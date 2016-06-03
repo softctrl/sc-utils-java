@@ -12,6 +12,8 @@ import java.io.Reader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import br.com.softctrl.utils.Objects;
 import br.com.softctrl.utils.json.adapter.StringAdapterFactory;
@@ -69,6 +71,8 @@ public final class GsonUtils {
 	private static GsonUtils $THIS = new GsonUtils(false, false);
 
 	private Gson gson;
+	
+	private JsonParser parser;
 
 	/**
 	 * @param pretty
@@ -122,6 +126,13 @@ public final class GsonUtils {
 	 */
 	Gson getGson() {
 		return this.gson;
+	}
+	
+	/**
+	 * @return parser.
+	 */
+	public JsonParser getParser() {
+		return this.parser;
 	}
 
 	/**
@@ -235,6 +246,14 @@ public final class GsonUtils {
 		} catch (Exception ex) {
 		}
 		return result;
+	}
+	
+	/**
+	 * @param json
+	 * @return
+	 */
+	public static JsonObject getAsJsonObject(String json) {
+		return getInstance().getParser().parse(json).getAsJsonObject();
 	}
 
 }

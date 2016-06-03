@@ -494,6 +494,17 @@ public final class Objects {
     public static <T>  T thisOrDefault(T value, T defaultValue) {
         return (T) (value == null ? requireNonNull(defaultValue, "Seriously!!"): value);
     }
+
+    /**
+     * 
+     * @param map
+     * @param key
+     * @param value
+     * @return
+     */
+    public static <K, V>  V thisOrDefault(Map<K, V> map, K key, V value) {
+    	return thisOrDefault(requireNonNull(map).get(key), value);
+    }
     
     /**
      * 

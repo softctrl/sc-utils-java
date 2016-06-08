@@ -1,6 +1,6 @@
 {
   "name": "Sc-utils-java",
   "tagline": "Just a library with all (well almost all) of my utilities classes.",
-  "body": "### Java Utils.\r\n\r\n### Methods:\r\nWe’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.\r\n\r\n### Authors and Contributors\r\nCarlos Timoshenko (@softctrl).",
+  "body": "# sc-utils-java\r\nSo, i just use this project to put all utils libraries that i create to help me on my own projects.\r\n\r\nI hope that this project can help you too.\r\n\r\n=D\r\n\r\nyou can download the last version here \r\n[sc-utils-java-0.0.2-SNAPSHOT.jar](https://github.com/softctrl/sc-utils-java/blob/master/file/sc-utils-java-0.0.2-SNAPSHOT.jar?raw=true).\r\n\r\n[![Build Status](https://travis-ci.org/softctrl/sc-utils-java.svg?branch=master)](https://travis-ci.org/softctrl/sc-utils-java)\r\n\r\n### Authors and Contributors\r\nCarlos Timoshenko (@softctrl).",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }

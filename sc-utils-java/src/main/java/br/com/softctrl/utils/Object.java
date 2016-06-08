@@ -149,9 +149,20 @@ public class Object implements Serializable {
      * @param clazz
      * @return
      */
+    public static <E> E[] fromJsonArray(String json, Class<E[]> clazz){
+        return GsonUtils.fromJson(json, clazz);
+    }
+
+    /**
+     * 
+     * @param json
+     * @param clazz
+     * @return
+     */
     public static <E> E fromJson(JsonElement json, Class<E> clazz){
         return GsonUtils.fromJson(json, clazz);
     }
+
     /**
      * 
      * @param json

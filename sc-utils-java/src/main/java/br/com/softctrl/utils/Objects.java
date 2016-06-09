@@ -45,6 +45,13 @@ public final class Objects {
 	private Objects() {
 		throw new AssertionError("No br.com.softctrl.utils.Objects instances for you!");
 	}
+	
+	/**
+	 * @author carlostimoshenkorodrigueslopes@gmail.com
+	 */
+	public interface Factory<T> {
+		T create();
+	}
 
 	/**
 	 * @author carlostimoshenkorodrigueslopes@gmail.com
@@ -469,14 +476,24 @@ public final class Objects {
 	public static <T> boolean nonNullOrEmpty(List<T> tList) {
 		return (tList != null && tList.size() > 0);
 	}
-
+	
 	/**
 	 * @param value
 	 * @param defaultValue
 	 * @return
 	 */
 	public static <T> T thisOrDefault(T value, T defaultValue) {
-		return (T) (value == null ? requireNonNull(defaultValue, "Seriously!!") : value);
+		return (T) (isNull(value) ? requireNonNull(defaultValue, "Seriously!!") : value);
+	}
+
+	/**
+	 * 
+	 * @param value
+	 * @param factory
+	 * @return
+	 */
+	public static <T> T thisOrDefault(T value, Factory<T> factory) {
+		return (T) (isNull(value) ? requireNonNull(factory, "Seriously!!").create() : value);
 	}
 
 	/**
@@ -487,6 +504,17 @@ public final class Objects {
 	 */
 	public static <K, V> V thisOrDefault(Map<K, V> map, K key, V value) {
 		return thisOrDefault(requireNonNull(map).get(key), value);
+	}
+
+	/**
+	 * 
+	 * @param map
+	 * @param key
+	 * @param factory
+	 * @return
+	 */
+	public static <K, V> V thisOrDefault(Map<K, V> map, K key, Factory<V> factory) {
+		return thisOrDefault(requireNonNull(map, "Seriously!!").get(key), factory);
 	}
 
 	/**

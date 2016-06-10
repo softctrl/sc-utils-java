@@ -255,5 +255,13 @@ public final class GsonUtils {
 	public static JsonObject getAsJsonObject(String json) {
 		return getInstance().getParser().parse(json).getAsJsonObject();
 	}
+	
+ 	/**
+	 * @param json
+	 * @return
+	 */	
+	public static JsonElement getAsJsonElement(String json) {
+        	return fromJson(json, JsonElement.class);
+	}
 
 }

@@ -270,7 +270,9 @@ public final class GsonUtils {
 	 * @return
 	 */
 	public static boolean isValidProperty(JsonObject jsonObject, String propertyName) {
-		 return !jsonObject.isJsonNull() && (jsonObject.get(propertyName) != null && !jsonObject.get(propertyName).isJsonNull());
+		Objects.requireNonNull(jsonObject, "you need inform a vlaid JsonObject.");
+		JsonElement property = jsonObject.get(propertyName);
+		return (Objects.nonNull(property) && ! property.isJsonNull());
 	}
 
 }

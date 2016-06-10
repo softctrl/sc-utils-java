@@ -263,5 +263,14 @@ public final class GsonUtils {
 	public static JsonElement getAsJsonElement(String json) {
         	return fromJson(json, JsonElement.class);
 	}
+	
+	/**
+	 * @param jsonObject
+	 * @param propertyName
+	 * @return
+	 */
+	public static boolean isValidProperty(JsonObject jsonObject, String propertyName) {
+		 return !jsonObject.isJsonNull() && (jsonObject.get(propertyName) != null && !jsonObject.get(propertyName).isJsonNull());
+	}
 
 }

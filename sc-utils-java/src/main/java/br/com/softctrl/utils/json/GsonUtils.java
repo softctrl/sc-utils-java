@@ -161,6 +161,14 @@ public final class GsonUtils {
 	public static final <T> JsonElement toJsonElement(final T object) {
 		return getInstance().getGson().toJsonTree(object);
 	}
+	
+	/**
+	 * @param object
+	 * @return T
+	 */
+	public static final <T> JsonArray toJsonArray(final T object) {
+		return toJsonElement(object).getAsJsonArray();
+	}
 
 	/**
 	 * @param file

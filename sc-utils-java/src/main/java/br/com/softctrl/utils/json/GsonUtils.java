@@ -247,7 +247,18 @@ public final class GsonUtils {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * 
+	 * @param json
+	 * @return
+	 */
+	public static boolean isEmptyJson(final String json) {
+		return Objects.isNullOrEmpty(json)              ||
+			   Constants.EMPTY_JSON_OBJECT.equals(json) ||
+			   Constants.EMPTY_JSON_ARRAY.equals(json);
+	}
+
 	/**
 	 * @param json
 	 * @return

@@ -513,7 +513,7 @@ public final class Objects {
 	 * @param factory
 	 * @return
 	 */
-	public static <K, V> V thisOrDefault(Map<K, V> map, K key, Factory<V> factory) {
+	public static <K, V> V thisOrDefaultAssync(Map<K, V> map, K key, Factory<V> factory) {
 		return thisOrDefault(requireNonNull(map, "Seriously!!").get(key), factory);
 	}
 

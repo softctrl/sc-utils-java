@@ -438,6 +438,21 @@ public final class Objects {
 	}
 
 	/**
+	 * 
+	 * @param objects
+	 * @return
+	 */
+	public static boolean nonNull(java.lang.Object... objects) {
+		boolean result = false;
+		if (nonNullOrEmpty(objects)) {
+			for (java.lang.Object object : objects) {
+				result = result && nonNull(object);
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * @param value
 	 * @return
 	 */

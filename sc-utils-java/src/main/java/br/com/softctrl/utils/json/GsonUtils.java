@@ -87,7 +87,7 @@ public final class GsonUtils {
 			builder.setPrettyPrinting();
 		if (serializeNulls)
 			builder.serializeNulls();
-		if (serializers != null) {
+		if (!Objects.isNullOrEmpty(serializers)) {
 			for (JsonSerializer<?> serializer : serializers) {
 				builder.registerTypeAdapter(serializer.getClazz(), serializer);
 

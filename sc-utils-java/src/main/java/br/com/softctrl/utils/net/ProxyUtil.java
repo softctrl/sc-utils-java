@@ -38,5 +38,17 @@ public final class ProxyUtil {
     public static final synchronized void setProxy(SCAuthenticator authenticator) {
         Authenticator.setDefault(authenticator);
     }
+    
+    public static final synchronized void setProxy(final String server, int port, String username, String password) {
+    	System.getProperties().put("http.proxyHost", server);
+    	System.getProperties().put("http.proxyPort", port);
+    	System.getProperties().put("http.proxyUser", username);
+    	System.getProperties().put("http.proxyPassword", password);
+
+    	System.getProperties().put("https.proxyHost", server);
+    	System.getProperties().put("https.proxyPort", port);
+    	System.getProperties().put("https.proxyUser", username);
+    	System.getProperties().put("https.proxyPassword", password);
+}
 
 }

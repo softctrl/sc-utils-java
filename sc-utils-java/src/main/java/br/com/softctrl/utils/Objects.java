@@ -68,7 +68,7 @@ public final class Objects {
 
 		private StringBuilder mDescription = new StringBuilder();
 
-		private java.util.HashMap<String, Object> mFields = new java.util.HashMap<String, Object>();
+		private java.util.HashMap<String, java.lang.Object> mFields = new java.util.HashMap<String, java.lang.Object>();
 
 		/**
 		 * @param clazz
@@ -94,7 +94,7 @@ public final class Objects {
 		@Override
 		public String toString() {
 			StringBuilder result = new StringBuilder('{');
-			for (Map.Entry<String, Object> field : this.mFields.entrySet()) {
+			for (Map.Entry<String, java.lang.Object> field : this.mFields.entrySet()) {
 				result.append(field.getKey()).append(':').append(' ').append(field.getValue()).append(' ');
 			}
 			return this.mDescription.append(result).append('}').toString();
@@ -443,7 +443,7 @@ public final class Objects {
 	 * @return
 	 */
 	public static boolean nonNull(java.lang.Object... objects) {
-		boolean result = false;
+		boolean result = true;
 		if (nonNullOrEmpty(objects)) {
 			for (java.lang.Object object : objects) {
 				result = result && nonNull(object);

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import br.com.softctrl.utils.Contants;
+import br.com.softctrl.utils.Objects;
 
 /*
 The MIT License (MIT)
@@ -47,7 +48,7 @@ public final class StreamUtils {
      */
     public static final String streamToString(InputStream inputStream) {
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        if (inputStream != null) {
+        if (Objects.nonNull(inputStream)) {
             final byte[] buffer = new byte[1024];
             int length = 0;
             try {
@@ -69,7 +70,7 @@ public final class StreamUtils {
      */
     public static final byte[] streamToByteArray(InputStream inputStream) {
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        if (inputStream != null) {
+        if (Objects.nonNull(inputStream)) {
             final byte[] buffer = new byte[1024];
             int length = 0;
             try {
@@ -91,7 +92,7 @@ public final class StreamUtils {
      */
     public static final void streamCopy(final InputStream in, final OutputStream out) {
 
-        if (in == null || out == null)
+        if (!Objects.nonNull(in, out))
             throw new IllegalArgumentException("You need to provide input and output streams.");
         final byte[] buffer = new byte[8192];
         int len = 0;

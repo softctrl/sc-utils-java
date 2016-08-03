@@ -82,7 +82,7 @@ public final class Objects {
 		 * @param value
 		 * @return
 		 */
-		public StringHelper add(String name, Object value) {
+		public StringHelper add(String name, java.lang.Object value) {
 			this.mFields.put(name, value);
 			return this;
 		}

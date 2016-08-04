@@ -676,5 +676,26 @@ public final class Objects {
 		int vlr = requireNonNull(value).intValue();
 		return (start <= vlr && vlr <= end);
 	}
+	
+	/**
+	 * @author carlostimoshenkorodrigueslopes@gmail.com
+	 */
+	public interface Action<T> {
+		void execute(T value);
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static <T> void forEach(T[] values, Action<T> action){
+		requireNonNull(action, "You need to informa a valid Action.");
+		if (nonNullOrEmpty(values)) {
+			for(T value : values) {
+				action.execute(value);
+			}
+		}
+	}
 
 }

@@ -101,6 +101,14 @@ public class Object implements Serializable {
     }
 
     /**
+     * 
+     * @return
+     */
+    public final JsonElement toJsonObject() {
+        return GsonUtils.toJsonObject(this);
+    }
+
+    /**
 	 * Performs a compression on the Json representation of this instance object.
 	 * @return A compressed string.
 	 * @throws IOException .

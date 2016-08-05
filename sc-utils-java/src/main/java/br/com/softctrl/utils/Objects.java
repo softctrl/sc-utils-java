@@ -29,6 +29,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import br.com.softctrl.utils.json.GsonUtils;
@@ -477,6 +478,60 @@ public final class Objects {
 	}
 
 	/**
+	 * 
+	 * @param tArray
+	 * @return
+	 */
+	public static boolean nonNullOrEmpty(byte[] tArray) {
+		return (tArray != null && tArray.length > 0);
+	}
+
+	/**
+	 * 
+	 * @param tArray
+	 * @return
+	 */
+	public static boolean nonNullOrEmpty(char[] tArray) {
+		return (tArray != null && tArray.length > 0);
+	}
+
+	/**
+	 * 
+	 * @param tArray
+	 * @return
+	 */
+	public static boolean nonNullOrEmpty(double[] tArray) {
+		return (tArray != null && tArray.length > 0);
+	}
+
+	/**
+	 * 
+	 * @param tArray
+	 * @return
+	 */
+	public static boolean nonNullOrEmpty(float[] tArray) {
+		return (tArray != null && tArray.length > 0);
+	}
+
+	/**
+	 * 
+	 * @param tArray
+	 * @return
+	 */
+	public static boolean nonNullOrEmpty(int[] tArray) {
+		return (tArray != null && tArray.length > 0);
+	}
+
+	/**
+	 * 
+	 * @param tArray
+	 * @return
+	 */
+	public static boolean nonNullOrEmpty(long[] tArray) {
+		return (tArray != null && tArray.length > 0);
+	}
+
+	/**
 	 * @param map
 	 * @return
 	 */
@@ -684,18 +739,233 @@ public final class Objects {
 		void execute(T value);
 	}
 	
+	private static final String ERROR_INVALID_ACTION = "You need to informa a valid Action.";
+	
 	/**
 	 * 
 	 * @param values
 	 * @param action
 	 */
 	public static <T> void forEach(T[] values, Action<T> action){
-		requireNonNull(action, "You need to informa a valid Action.");
+		requireNonNull(action, ERROR_INVALID_ACTION);
 		if (nonNullOrEmpty(values)) {
 			for(T value : values) {
 				action.execute(value);
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static void forEach(boolean[] values, Action<Boolean> action){
+		requireNonNull(action, ERROR_INVALID_ACTION);
+		if (nonNullOrEmpty(values)) {
+			for(boolean value : values) {
+				action.execute(value);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static void forEach(byte[] values, Action<Byte> action){
+		requireNonNull(action, ERROR_INVALID_ACTION);
+		if (nonNullOrEmpty(values)) {
+			for(byte value : values) {
+				action.execute(value);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static void forEach(char[] values, Action<Byte> action){
+		requireNonNull(action, ERROR_INVALID_ACTION);
+		if (nonNullOrEmpty(values)) {
+			for(char value : values) {
+				action.execute((byte) value);
+			}
+		}
+	}
 
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static void forEach(double[] values, Action<Double> action){
+		requireNonNull(action, ERROR_INVALID_ACTION);
+		if (nonNullOrEmpty(values)) {
+			for(double value : values) {
+				action.execute(value);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static void forEach(float[] values, Action<Float> action){
+		requireNonNull(action, ERROR_INVALID_ACTION);
+		if (nonNullOrEmpty(values)) {
+			for(float value : values) {
+				action.execute(value);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static void forEach(int[] values, Action<Integer> action){
+		requireNonNull(action, ERROR_INVALID_ACTION);
+		if (nonNullOrEmpty(values)) {
+			for(int value : values) {
+				action.execute(value);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @param action
+	 */
+	public static void forEach(long[] values, Action<Long> action){
+		requireNonNull(action, ERROR_INVALID_ACTION);
+		if (nonNullOrEmpty(values)) {
+			for(long value : values) {
+				action.execute(value);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
+	public static JsonArray toJsonArray(String[] values){
+		final JsonArray result = new JsonArray();
+		forEach(values, new Objects.Action<String>() {
+			public void execute(String value) {
+				result.add(value);
+			}
+		});
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
+	public static JsonArray toJsonArray(boolean[] values){
+		final JsonArray result = new JsonArray();
+		forEach(values, new Objects.Action<Boolean>() {
+			public void execute(Boolean value) {
+				result.add(value);
+			}
+		});
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
+	public static JsonArray toJsonArray(byte[] values){
+		final JsonArray result = new JsonArray();
+		forEach(values, new Objects.Action<Byte>() {
+			public void execute(Byte value) {
+				result.add(value);
+			}
+		});
+		return result;
+	}
+	
+//	public static JsonArray toJsonArray(char[] values){
+//		final JsonArray result = new JsonArray();
+//		forEach(values, new Objects.Action<Byte>() {
+//			public void execute(Byte value) {
+//				result.add(String.valueOf(value));
+//			}
+//		});
+//		return result;
+//	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
+	public static JsonArray toJsonArray(double[] values){
+		final JsonArray result = new JsonArray();
+		forEach(values, new Objects.Action<Double>() {
+			public void execute(Double value) {
+				result.add(value);
+			}
+		});
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
+	public static JsonArray toJsonArray(float[] values){
+		final JsonArray result = new JsonArray();
+		forEach(values, new Objects.Action<Float>() {
+			public void execute(Float value) {
+				result.add(value);
+			}
+		});
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
+	public static JsonArray toJsonArray(int[] values){
+		final JsonArray result = new JsonArray();
+		forEach(values, new Objects.Action<Integer>() {
+			public void execute(Integer value) {
+				result.add(value);
+			}
+		});
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
+	public static JsonArray toJsonArray(long[] values){
+		final JsonArray result = new JsonArray();
+		forEach(values, new Objects.Action<Long>() {
+			public void execute(Long value) {
+				result.add(value);
+			}
+		});
+		return result;
+	}
+	
 }

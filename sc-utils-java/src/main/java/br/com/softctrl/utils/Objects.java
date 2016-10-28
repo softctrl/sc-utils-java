@@ -898,16 +898,6 @@ public final class Objects {
 		return result;
 	}
 	
-//	public static JsonArray toJsonArray(char[] values){
-//		final JsonArray result = new JsonArray();
-//		forEach(values, new Objects.Action<Byte>() {
-//			public void execute(Byte value) {
-//				result.add(String.valueOf(value));
-//			}
-//		});
-//		return result;
-//	}
-	
 	/**
 	 * 
 	 * @param values
@@ -966,6 +956,17 @@ public final class Objects {
 			}
 		});
 		return result;
+	}
+	
+	/**
+	 * We can use this method to protect against null pointer exception when
+	 * validate a Boolean value.
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static final boolean isTrue(final Boolean value){
+		return (value != null && value);
 	}
 	
 }

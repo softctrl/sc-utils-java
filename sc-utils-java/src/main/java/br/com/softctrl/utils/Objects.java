@@ -28,6 +28,7 @@ package br.com.softctrl.utils;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -420,6 +421,14 @@ public final class Objects {
 	 * @return
 	 */
 	public static <T, S> boolean isNullOrEmpty(Map<T, S> items) {
+		return (isNull(items) ? true : (items.size() == 0));
+	}
+
+	/**
+	 * @param items
+	 * @return
+	 */
+	public static <T> boolean isNullOrEmpty(Set<T> items) {
 		return (isNull(items) ? true : (items.size() == 0));
 	}
 

@@ -1,6 +1,9 @@
 package br.com.softctrl.utils.io;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -43,9 +46,46 @@ public final class StreamUtils {
 
     /**
      * 
-     * @param inputStream
+     * @param filename
+     * @return
+     * @throws FileNotFoundException
+     */
+	public static final String fileToString(final String filename) throws FileNotFoundException {
+
+		FileInputStream fis = new FileInputStream(FileUtils.getResourceFile(filename));
+		return streamToString(fis);
+
+	}
+
+	/**
+	 * 
+	 * @param file
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	public static final String fileToString(final File file) throws FileNotFoundException {
+
+		FileInputStream fis = new FileInputStream(file);
+		return streamToString(fis);
+
+	}
+	
+    /**
+     * 
+     * @param resource
      * @return
      */
+    public static final InputStream getSystemResourceAsStream(final String resource) {
+    	
+    	return ClassLoader.getSystemResourceAsStream(resource);
+    	
+    }
+
+	/**
+	 * 
+	 * @param inputStream
+	 * @return
+	 */
     public static final String streamToString(InputStream inputStream) {
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         if (Objects.nonNull(inputStream)) {

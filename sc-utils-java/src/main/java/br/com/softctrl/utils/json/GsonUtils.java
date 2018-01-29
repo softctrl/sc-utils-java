@@ -54,6 +54,9 @@ public final class GsonUtils {
 		public static final String EMPTY_JSON_ARRAY = "[]";
 
 		public static final String EMPTY_STRING = "";
+		
+		public static final String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss.S"; 
+		
 	}
 
 	/**
@@ -69,20 +72,23 @@ public final class GsonUtils {
 		Class<E> getClazz();
 	}
 
-	private static GsonUtils $THIS = new GsonUtils(false, false);
+	private static GsonUtils $THIS = new GsonUtils(false, false, null);
 
 	private Gson gson;
 	
 	private JsonParser parser;
 
 	/**
+	 * 
 	 * @param pretty
 	 * @param serializeNulls
+	 * @param dateFormat
 	 * @param serializers
 	 */
-	private GsonUtils(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
+	private GsonUtils(boolean pretty, boolean serializeNulls, final String dateFormat, JsonSerializer<?>... serializers) {
 		GsonBuilder builder = (new GsonBuilder()).excludeFieldsWithoutExposeAnnotation();
 		builder.registerTypeAdapterFactory(new StringAdapterFactory());
+		builder.setDateFormat(Objects.thisOrDefault(dateFormat, Constants.DATE_FORMAT));
 		if (pretty)
 			builder.setPrettyPrinting();
 		if (serializeNulls)
@@ -101,8 +107,20 @@ public final class GsonUtils {
 	 * @param serializers
 	 * @return
 	 */
+	@Deprecated
 	public static final GsonUtils setup(boolean pretty, JsonSerializer<?>... serializers) {
-		return ($THIS = new GsonUtils(pretty, true, serializers));
+		return ($THIS = new GsonUtils(pretty, true, null, serializers));
+	}
+	
+	/**
+	 * 
+	 * @param pretty
+	 * @param dateFormat
+	 * @param serializers
+	 * @return
+	 */
+	public static final GsonUtils setup(boolean pretty, final String dateFormat, JsonSerializer<?>... serializers) {
+		return ($THIS = new GsonUtils(pretty, true, dateFormat, serializers));
 	}
 
 	/**
@@ -111,10 +129,27 @@ public final class GsonUtils {
 	 * @param serializers
 	 * @return
 	 */
+	@Deprecated
 	public static final GsonUtils setup(boolean pretty, boolean serializeNulls, JsonSerializer<?>... serializers) {
-		return ($THIS = new GsonUtils(pretty, serializeNulls, serializers));
+		return ($THIS = new GsonUtils(pretty, serializeNulls, null, serializers));
 	}
 
+	/**
+	 * 
+	 * @param pretty
+	 * @param serializeNulls
+	 * @param dateFormat
+	 * @param serializers
+	 * @return
+	 */
+	public static final GsonUtils setup(boolean pretty, boolean serializeNulls, final String dateFormat, JsonSerializer<?>... serializers) {
+		return ($THIS = new GsonUtils(pretty, serializeNulls, dateFormat, serializers));
+	}
+	
+	
+	
+	
+	
 	/**
 	 * @return
 	 */

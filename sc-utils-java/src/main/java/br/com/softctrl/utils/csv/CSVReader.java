@@ -3,9 +3,7 @@
  */
 package br.com.softctrl.utils.csv;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -148,7 +146,7 @@ public class CSVReader implements Serializable {
 	 * 
 	 * @param b
 	 */
-	protected void read(final char b) {
+	public void read(final char b) {
 
 		this.line.append(b);
 		if (b == this.delimiter && OPENED_QUOTE != this.statusQuote) {
@@ -210,7 +208,7 @@ public class CSVReader implements Serializable {
 	/**
 	 * 
 	 */
-	protected final void clear() {
+	public final void clear() {
 		this.row.clear();
 		this.field = new StringBuilder();
 		this.line = new StringBuilder();	

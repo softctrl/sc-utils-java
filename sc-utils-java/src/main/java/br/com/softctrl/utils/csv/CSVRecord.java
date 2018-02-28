@@ -31,6 +31,7 @@ import java.util.Arrays;
  * @author carlostimoshenkorodrigueslopes@gmail.com
  */
 public final class CSVRecord implements Serializable {
+
 	private static final long serialVersionUID = -7758506152770487938L;
 	private final String[] fields;
 	private final String line;

@@ -46,6 +46,18 @@ public final class EnvironmentUtils {
 	/**
 	 * 
 	 * @param key
+	 * @return
+	 */
+	public static final String getenv(final String key) {
+
+		final String value = System.getenv(key);
+		return Objects.thisOrNull(value);
+
+	}
+
+	/**
+	 * 
+	 * @param key
 	 * @param defaullt
 	 * @return
 	 */

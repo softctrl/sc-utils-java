@@ -568,6 +568,15 @@ public final class Objects {
 	/**
 	 * 
 	 * @param value
+	 * @return
+	 */
+	public static <T> T thisOrNull(T value) {
+		return (isNull(value) ? null : (T) value);
+	}
+
+	/**
+	 * 
+	 * @param value
 	 * @param factory
 	 * @return
 	 */
